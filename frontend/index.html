@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yantra Live Chatbot</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="chat-panel">
+        <header>
+          <h1>Yantra Live </h1>
+           
+        </header>
+        <div id="chat-log" class="chat-log" aria-live="polite"></div>
+        <form id="chat-form" class="chat-form">
+          <input
+            type="text"
+            id="chat-input"
+            name="question"
+            placeholder="Ask about a Yantra Live model..."
+            autocomplete="off"
+            required
+          />
+          <button type="submit">Send</button>
+        </form>
+      </section>
+      <section class="preview-panel">
+        <h2>Referenced Images</h2>
+        <div id="image-grid" class="image-grid" aria-live="polite"></div>
+      </section>
+    </main>
+    <template id="message-template">
+      <div class="message">
+        <div class="meta"></div>
+        <div class="content"></div>
+      </div>
+    </template>
+    <script src="/static/main.js" type="module"></script>
+  </body>
+</html>
