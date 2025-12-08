@@ -253,7 +253,23 @@ class YantraRAGAgent:
     def answer(self, question: str, history: List[dict] = None) -> AgentAnswer:
         # 1. Gemini File Search Path
         if self.provider == "gemini" and self.settings.gemini_store_id and genai_v2:
-            return self._answer_with_gemini_file_search(question, history)
+            gemini_answer = self._answer_with_gemini_file_search(question, history)
+            
+            # Check if the answer is a refusal or error
+            is_refusal = "I don't have information about that" in gemini_answer.answer
+            is_error = "Error querying Gemini Knowledge Base" in gemini_answer.answer
+            
+            if not is_refusal and not is_error:
+                # If successful, try to enrich with images from local vector store
+                try:
+                    hits = self.vector_store.search(question, self.settings.top_k)
+                    images = self._select_images(hits, question)
+                    gemini_answer.images = images
+                except Exception as e:
+                    LOGGER.warning(f"Failed to retrieve local images for Gemini answer: {e}")
+                return gemini_answer
+            
+            LOGGER.info("Gemini File Search refused or failed. Falling back to local RAG.")
 
         # 2. Standard RAG Path (Groq / OpenAI / Gemini-Legacy)
         hits = self.vector_store.search(question, self.settings.top_k)
