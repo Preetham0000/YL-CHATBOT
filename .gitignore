@@ -38,6 +38,9 @@ venv.bak/
 data/raw/
 data/processed/*
 !data/processed/images/
+!data/processed/index.faiss
+!data/processed/chunks.jsonl
+!data/processed/images_manifest.json
 data/interim/
 data/external/
 *.pdf
