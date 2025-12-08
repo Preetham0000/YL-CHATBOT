@@ -36,13 +36,15 @@ venv.bak/
 
 # Project Data
 data/raw/
-data/processed/
+data/processed/*
+!data/processed/images/
 data/interim/
 data/external/
 *.pdf
 *.png
 *.jpg
 *.jpeg
+!data/processed/images/**
 
 # Logs
 *.log
