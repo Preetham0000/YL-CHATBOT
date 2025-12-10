@@ -1,4 +1,4 @@
-# Yantra Live RAG Chatbot
+# YL RAG Chatbot
 
 A retrieval-augmented chatbot tailored for Yantra Live brochures. The agent answers **only** from the curated knowledge base and returns brochure images whenever they support a reply. If the answer is missing, it responds with `I don't have information about that in my knowledge base`.
 
